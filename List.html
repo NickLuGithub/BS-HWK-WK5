@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <head>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -152,9 +151,76 @@
 
     
     <script type="module">
-        import { $pod } from "Topic\product.js"
+        import { product as pod } from "/Topic/product.js"
 
-        
+        let se_02;
+        let theadByTable, tbodyByTable, tfootByTable;
+        window.onload = () => {
+            GetElement();
+
+            // 寫到這裡
+            setProduct();
+        }
+
+        function GetElement() {
+            se_02 = document.querySelector(".se_02 .container");
+        }
+
+        function setCard(img, title, p) {
+            // <div class="card">
+            //     <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
+            //     <div class="card-body">
+            //         <h5 class="card-title">Card title</h5>
+            //         <p class="card-text">Some quick example text to build on the card title and make up the bulk
+            //             of the card's content.</p>
+            //         <a href="#" class="btn btn-primary">Go somewhere</a>
+            //     </div>
+            // </div>
+
+            let newCard = document.createElement("div")
+            newCard.setAttribute("class", "item col-12 col-md-4 col-lg-4");
+            let c = document.createElement("div");
+            c.setAttribute("class", "card");
+            let cardBody = document.createElement("div");
+            cardBody.setAttribute("class", "card-body");
+            
+            let imgA = document.createElement("img");
+            imgA.setAttribute("src", "/img/001.jpg"); 
+            imgA.setAttribute("class", "card-img-top"); 
+
+            let h5A = document.createElement("h5");
+            h5A.setAttribute("class", "card-title");
+            h5A.innerText = title;
+
+            let pA = document.createElement("p");
+            pA.setAttribute("class", "card-text");
+            pA.innerText = p;
+
+            cardBody.append(imgA, h5A, pA);
+            c.append(cardBody);
+            newCard.append(c);
+            se_02.append(newCard);
+        }
+
+        function setProduct() {
+
+            
+
+            pod.forEach(element => {
+                // "ProductNumber": "P001",
+                // "ProductName": "iPhone 14",
+                // "Amount": 0,
+                // "Price": 45000,
+                // "ProductType": "3C"
+                let setArray = [];
+                let keys = Object.keys(element);
+                keys.forEach((item) => {
+                    setArray.push(element[item])
+                });
+                
+                setCard("https://fakeimg.pl/300x200/200", setArray[1], setArray[3]);
+            });
+        }
     </script>
 </body>
 
