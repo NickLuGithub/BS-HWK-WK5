@@ -1,0 +1,15 @@
+footer {
+    height: 1000px;
+}
+.se_01 {
+    max-height: 300px;
+}
+.se_01 .card {
+    max-height: 300px;
+    overflow: hidden;
+}
+
+.se_01 .card img {
+    position: relative;
+    bottom: 200px;
+}
