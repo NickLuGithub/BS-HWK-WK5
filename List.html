@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <head>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -66,75 +67,22 @@
             </div>
         </section>
 
-        <section class="se_02">
-            <div class="container row mx-auto">
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item col-12 col-md-4 col-lg-4">
-                    <div class="card">
-                        <img src="https://fakeimg.pl/300x200/200" class="card-img-top"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+        <section class="se_02 mx-auto">
+            <div class="buttonLIST row ">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown button
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </div>
             </div>
+            
+            <div class="container row"></div>
         </section>
 
         <footer>
@@ -149,7 +97,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
 
-    
+
     <script type="module">
         import { product as pod } from "/Topic/product.js"
 
@@ -178,15 +126,15 @@
             // </div>
 
             let newCard = document.createElement("div")
-            newCard.setAttribute("class", "item col-12 col-md-4 col-lg-4");
+            newCard.setAttribute("class", "item col-12 col-md-4 col-lg-4 mt-3");
             let c = document.createElement("div");
             c.setAttribute("class", "card");
             let cardBody = document.createElement("div");
             cardBody.setAttribute("class", "card-body");
-            
+
             let imgA = document.createElement("img");
-            imgA.setAttribute("src", "/img/001.jpg"); 
-            imgA.setAttribute("class", "card-img-top"); 
+            imgA.setAttribute("src", img);
+            imgA.setAttribute("class", "card-img-top img-fluid");
 
             let h5A = document.createElement("h5");
             h5A.setAttribute("class", "card-title");
@@ -194,17 +142,17 @@
 
             let pA = document.createElement("p");
             pA.setAttribute("class", "card-text");
-            pA.innerText = p;
+            pA.innerHTML = p;
 
-            cardBody.append(imgA, h5A, pA);
-            c.append(cardBody);
+            cardBody.append(h5A, pA);
+            c.append(imgA, cardBody);
             newCard.append(c);
             se_02.append(newCard);
         }
 
         function setProduct() {
 
-            
+            let keys = Object.keys(pod[0]);
 
             pod.forEach(element => {
                 // "ProductNumber": "P001",
@@ -213,12 +161,10 @@
                 // "Price": 45000,
                 // "ProductType": "3C"
                 let setArray = [];
-                let keys = Object.keys(element);
                 keys.forEach((item) => {
                     setArray.push(element[item])
                 });
-                
-                setCard("https://fakeimg.pl/300x200/200", setArray[1], setArray[3]);
+                setCard("/img/001.jpg", setArray[1], `目前剩餘數量 ${setArray[2]}<br>售價 ${setArray[3]} 元`);
             });
         }
     </script>
