@@ -69,8 +69,8 @@
         </section>
 
         <section class="se_02 mx-auto ">
-            <div class="buttonLIST container row mx-auto">
-                <div class="dropdown">
+            <div class="buttonLIST container row mx-auto d-flex flex-wrap">
+                <div class="dropdown col-1">
                     <button class="btn btn-secondary dropdown-toggle ms-auto" type="button" id="classDropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         分類
@@ -81,6 +81,7 @@
                         <li><button class="dropdown-item" id="classDropdownDrinks">飲料</button></li>
                     </ul>
                 </div>
+                <button type="button" class="btn btn-outline-primary col-1" id="removeSearch">清除搜尋</button>
             </div>
             <div class="container row mx-auto "></div>
         </section>
@@ -105,25 +106,17 @@
         let theadByTable, tbodyByTable, tfootByTable;
         let keys;
         let classDropdown;
+
         window.onload = () => {
             keys = Object.keys(pod[0]);
             // 設定相關連接
             GetElement();
             // 寫到這裡
             setProduct();
-
-            const classDropdownMenuButton = document.getElementById('classDropdownMenuButton');
-            classDropdownMenuButton.addEventListener('show.bs.dropdown', event => {
-
-                const Class3C = document.getElementById('classDropdown3C');
-                const ClassFoods = document.getElementById('classDropdownFoods');
-                const ClassDrinks = document.getElementById('classDropdownDrinks');
-
-
-                Class3C.addEventListener("click", setProductOfType("3C"));
-                ClassFoods.addEventListener("click", setProductOfType("食品"));
-                ClassDrinks.addEventListener("click", setProductOfType("飲料"));
-            })
+            // 設定類別選取
+            setClassDropdownMenuButton();
+            // remove button
+            setRemoveSearch();
         }
 
         function GetElement() {
@@ -191,8 +184,35 @@
                     setArray.push(element[item])
                 });
                 if (setArray[4] == type) {
-                    setCard("/img/002.jpg", setArray[1], `目前剩餘數量 ${setArray[2]}<br>售價 ${setArray[3]} 元`);
+                    setCard("/img/001.jpg", setArray[1], `目前剩餘數量 ${setArray[2]}<br>售價 ${setArray[3]} 元`);
                 }
+            })
+        }
+
+        function setClassDropdownMenuButton() {
+            const classDropdownMenuButton = document.getElementById('classDropdownMenuButton');
+            classDropdownMenuButton.addEventListener('show.bs.dropdown', event => {
+                const Class3C = document.getElementById("classDropdown3C");
+                const ClassFoods = document.getElementById("classDropdownFoods");
+                const ClassDrinks = document.getElementById("classDropdownDrinks");
+
+                Class3C.addEventListener('click', function (event) {
+                    setProductOfType("3C")
+                });
+
+                ClassFoods.addEventListener('click', () => {
+                    setProductOfType("食品")
+                });
+                ClassDrinks.addEventListener('click', () => {
+                    setProductOfType("飲料")
+                });
+            })
+        }
+
+        function setRemoveSearch() {
+            const removeSercahID = document.getElementById("removeSearch");
+            removeSercahID.addEventListener('click', ()=>{
+                setProduct();
             })
         }
 
