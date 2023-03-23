@@ -9,6 +9,7 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
     <link rel="stylesheet" href="MYStyle.css">
+
 </head>
 
 <body>
@@ -58,7 +59,7 @@
             </div>
         </nav>
 
-        <section class="se_01 row">
+        <section class="se_01 row mb-3">
             <div class="card text-bg-dark">
                 <img src="img/IU-BG.jpg">
                 <!-- <div class="card-img-overlay d-flex justify-content-center align-content-center">
@@ -67,22 +68,21 @@
             </div>
         </section>
 
-        <section class="se_02 mx-auto">
-            <div class="buttonLIST row">
-                <div class="dropdown col-12 col-md-4 col-lg-4 mx-auto">
-                    <button class="btn btn-secondary dropdown-toggle ms-auto" type="button" id="dropdownMenuButton"
+        <section class="se_02 mx-auto ">
+            <div class="buttonLIST container row mx-auto">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle ms-auto" type="button" id="classDropdownMenuButton"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown button
+                        分類
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="classDropdownMenuButton">
+                        <li><button class="dropdown-item" id="classDropdown3C">3C</button></li>
+                        <li><button class="dropdown-item" id="classDropdownFoods">食品</button></li>
+                        <li><button class="dropdown-item" id="classDropdownDrinks">飲料</button></li>
                     </ul>
                 </div>
             </div>
-            
-            <div class="container row"></div>
+            <div class="container row mx-auto "></div>
         </section>
 
         <footer>
@@ -103,15 +103,32 @@
 
         let se_02;
         let theadByTable, tbodyByTable, tfootByTable;
+        let keys;
+        let classDropdown;
         window.onload = () => {
+            keys = Object.keys(pod[0]);
+            // 設定相關連接
             GetElement();
-
             // 寫到這裡
             setProduct();
+
+            const classDropdownMenuButton = document.getElementById('classDropdownMenuButton');
+            classDropdownMenuButton.addEventListener('show.bs.dropdown', event => {
+
+                const Class3C = document.getElementById('classDropdown3C');
+                const ClassFoods = document.getElementById('classDropdownFoods');
+                const ClassDrinks = document.getElementById('classDropdownDrinks');
+
+
+                Class3C.addEventListener("click", setProductOfType("3C"));
+                ClassFoods.addEventListener("click", setProductOfType("食品"));
+                ClassDrinks.addEventListener("click", setProductOfType("飲料"));
+            })
         }
 
         function GetElement() {
-            se_02 = document.querySelector(".se_02 .container");
+            se_02 = document.querySelector(".se_02 .container:nth-child(2)");
+            classDropdown = document.getElementById("classDropdownMenuButton");
         }
 
         function setCard(img, title, p) {
@@ -151,9 +168,7 @@
         }
 
         function setProduct() {
-
-            let keys = Object.keys(pod[0]);
-
+            se_02.innerHTML = ""
             pod.forEach(element => {
                 // "ProductNumber": "P001",
                 // "ProductName": "iPhone 14",
@@ -167,6 +182,20 @@
                 setCard("/img/001.jpg", setArray[1], `目前剩餘數量 ${setArray[2]}<br>售價 ${setArray[3]} 元`);
             });
         }
+
+        function setProductOfType(type) {
+            se_02.innerHTML = ""
+            pod.forEach(element => {
+                let setArray = [];
+                keys.forEach((item) => {
+                    setArray.push(element[item])
+                });
+                if (setArray[4] == type) {
+                    setCard("/img/002.jpg", setArray[1], `目前剩餘數量 ${setArray[2]}<br>售價 ${setArray[3]} 元`);
+                }
+            })
+        }
+
     </script>
 </body>
 
